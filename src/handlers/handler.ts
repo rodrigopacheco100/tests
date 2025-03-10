@@ -19,22 +19,13 @@ export type HandlerOutput = {
  *         description: Mensagem a ser retornada.
  *         schema:
  *           type: string
- *       - name: message2
- *         in: query
- *         required: true
- *         schema:
- *           type: string
  *     responses:
  *       200:
  *         description: Mensagem retornada com sucesso.
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensagem solicitada.
+ *               $ref: '#/components/schemas/HandlerOutput'
  */
 export class Handler {
   public perform(input: HandlerInput): HandlerOutput {

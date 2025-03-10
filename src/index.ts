@@ -2,16 +2,21 @@ import express from 'express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import { Handler } from './handlers/handler'
+import * as schemas from './docs/schemas'
 
 const app = express()
 app.use(express.json())
 
 const options: swaggerJSDoc.Options = {
   definition: {
+    openapi: '3.0.0',
     info: {
       title: 'Exemplo API',
       version: '1.0.0',
       description: 'API de exemplo usando Swagger JSDoc',
+    },
+    components: {
+      schemas,
     },
   },
   apis: ['./src/**/*.ts'],
