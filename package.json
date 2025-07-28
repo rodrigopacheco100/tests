@@ -2,7 +2,7 @@
   "name": "tests",
   "version": "1.0.0",
   "scripts": {
-    "start:dev": "tsx watch src/index.ts"
+    "start:dev": "tsx watch --env-file=.env src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -10,9 +10,13 @@
   "description": "",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
+    "@types/luxon": "^3.6.2",
     "@types/node": "^22.9.0",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "luxon": "^3.7.1"
   }
 }
