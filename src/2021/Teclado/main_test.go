@@ -1,7 +1,6 @@
-package teclado_test
+package main
 
 import (
-	teclado "obi-resolutions/src/2021/Teclado"
 	"testing"
 )
 
@@ -24,7 +23,7 @@ func TestTeclado(t *testing.T) {
 	}
 
 	for _, testCase := range testsSuite {
-		if result := teclado.IsMatchingCombination(testCase.cellphoneNumber, testCase.word); result != testCase.expected {
+		if result := IsMatchingCombination(testCase.cellphoneNumber, testCase.word); result != testCase.expected {
 			t.Errorf("IsMatchingCombination(%s, %s) = %v, expected %v", testCase.cellphoneNumber, testCase.word, result, testCase.expected)
 		}
 	}

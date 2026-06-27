@@ -1,4 +1,4 @@
-package zeroparacancelar_test
+package main_test
 
 import (
 	zeroparacancelar "obi-resolutions/src/2021/Zero-para-cancelar"

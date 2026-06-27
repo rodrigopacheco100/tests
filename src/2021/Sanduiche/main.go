@@ -1,4 +1,4 @@
-package sanduiche
+package main
 
 import (
 	"bufio"
@@ -19,10 +19,10 @@ func main() {
 		blockedPairs[i] = [2]int{x, y}
 	}
 
-	fmt.Println(CountValidSanduiches(n, blockedPairs))
+	fmt.Println(CountValidSandwiches(n, blockedPairs))
 }
 
-func CountValidSanduiches(n int, blockedPairs [][2]int) int {
+func CountValidSandwiches(n int, blockedPairs [][2]int) int {
 	var blockedMasks []int
 	for _, pair := range blockedPairs {
 		mask := (1 << (pair[0] - 1)) | (1 << (pair[1] - 1))

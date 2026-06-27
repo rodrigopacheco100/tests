@@ -1,4 +1,4 @@
-package ogro
+package main
 
 import (
 	"fmt"

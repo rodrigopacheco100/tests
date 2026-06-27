@@ -1,4 +1,4 @@
-package tempoderesposta
+package main
 
 import (
 	"bufio"

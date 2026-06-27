@@ -1,4 +1,4 @@
-package zeroparacancelar
+package main
 
 import (
 	"bufio"

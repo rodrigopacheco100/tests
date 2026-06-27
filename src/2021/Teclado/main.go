@@ -1,4 +1,4 @@
-package teclado
+package main
 
 import (
 	"fmt"

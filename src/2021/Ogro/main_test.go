@@ -1,7 +1,6 @@
-package ogro_test
+package main
 
 import (
-	ogro "obi-resolutions/src/2021/Ogro"
 	"testing"
 )
 
@@ -23,7 +22,7 @@ func TestOgro(t *testing.T) {
 	}
 
 	for _, testCase := range testsSuite {
-		if leftHand, rightHand := ogro.CalculateOgroFingers(testCase.input); leftHand != testCase.expectedLeft || rightHand != testCase.expectedRight {
+		if leftHand, rightHand := CalculateOgroFingers(testCase.input); leftHand != testCase.expectedLeft || rightHand != testCase.expectedRight {
 			t.Errorf("CalculateOgroFingers(%d) = %s %s, expected ('%s', '%s')", testCase.input, leftHand, rightHand, testCase.expectedLeft, testCase.expectedRight)
 		}
 	}

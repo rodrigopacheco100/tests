@@ -1,8 +1,8 @@
-package tempoderesposta_test
+package main_test
 
 import (
-	"reflect"
 	tempoderesposta "obi-resolutions/src/2021/Tempo-de-resposta"
+	"reflect"
 	"testing"
 )
 

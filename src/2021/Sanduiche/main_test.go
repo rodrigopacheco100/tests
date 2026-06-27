@@ -1,7 +1,6 @@
-package sanduiche_test
+package main
 
 import (
-	sanduiche "obi-resolutions/src/2021/Sanduiche"
 	"testing"
 )
 
@@ -11,7 +10,7 @@ type sanduicheTestCase struct {
 	expected     int
 }
 
-func TestCountValidSanduiches(t *testing.T) {
+func TestCountValidSandwiches(t *testing.T) {
 	testsSuite := []sanduicheTestCase{
 		{n: 3, blockedPairs: [][2]int{}, expected: 7},
 		{n: 3, blockedPairs: [][2]int{{1, 2}}, expected: 5},
@@ -22,8 +21,8 @@ func TestCountValidSanduiches(t *testing.T) {
 	}
 
 	for _, testCase := range testsSuite {
-		if result := sanduiche.CountValidSanduiches(testCase.n, testCase.blockedPairs); result != testCase.expected {
-			t.Errorf("CountValidSanduiches(%d, %v) = %d, expected %d", testCase.n, testCase.blockedPairs, result, testCase.expected)
+		if result := CountValidSandwiches(testCase.n, testCase.blockedPairs); result != testCase.expected {
+			t.Errorf("CountValidSandwiches(%d, %v) = %d, expected %d", testCase.n, testCase.blockedPairs, result, testCase.expected)
 		}
 	}
 }
