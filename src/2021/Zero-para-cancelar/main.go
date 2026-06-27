@@ -1,4 +1,4 @@
-package main
+package zeroparacancelar
 
 import (
 	"bufio"
@@ -13,24 +13,32 @@ func main() {
 	scanner.Scan()
 	entriesLength, _ := strconv.Atoi(scanner.Text())
 
+	values := make([]int, entriesLength)
+	for i := range entriesLength {
+		scanner.Scan()
+		values[i], _ = strconv.Atoi(scanner.Text())
+	}
+
+	fmt.Println(SumAfterCancellations(values))
+}
+
+func SumAfterCancellations(values []int) int {
 	entries := []int{}
 
-	for range entriesLength {
-		scanner.Scan()
-
-		value, _ := strconv.Atoi(scanner.Text())
-
-		if value == 0 {
-			entries = entries[:len(entries)-1]
+	for _, v := range values {
+		if v == 0 {
+			if len(entries) > 0 {
+				entries = entries[:len(entries)-1]
+			}
 		} else {
-			entries = append(entries, value)
+			entries = append(entries, v)
 		}
 	}
 
 	sum := 0
-	for _, entry := range entries {
-		sum += entry
+	for _, e := range entries {
+		sum += e
 	}
 
-	fmt.Println(sum)
+	return sum
 }

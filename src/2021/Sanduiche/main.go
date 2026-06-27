@@ -1,4 +1,4 @@
-package main
+package sanduiche
 
 import (
 	"bufio"
@@ -12,11 +12,20 @@ func main() {
 	var n, m int
 	fmt.Fscan(reader, &n, &m)
 
-	var blockedMasks []int
+	blockedPairs := make([][2]int, m)
 	for i := 0; i < m; i++ {
 		var x, y int
 		fmt.Fscan(reader, &x, &y)
-		mask := (1 << (x - 1)) | (1 << (y - 1))
+		blockedPairs[i] = [2]int{x, y}
+	}
+
+	fmt.Println(CountValidSanduiches(n, blockedPairs))
+}
+
+func CountValidSanduiches(n int, blockedPairs [][2]int) int {
+	var blockedMasks []int
+	for _, pair := range blockedPairs {
+		mask := (1 << (pair[0] - 1)) | (1 << (pair[1] - 1))
 		blockedMasks = append(blockedMasks, mask)
 	}
 
@@ -34,5 +43,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(count)
+	return count
 }

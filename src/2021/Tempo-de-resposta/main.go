@@ -1,4 +1,4 @@
-package main
+package tempoderesposta
 
 import (
 	"bufio"
@@ -9,50 +9,59 @@ import (
 	"strings"
 )
 
+type Event struct {
+	Type  string
+	Value int
+}
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	entriesLength, _ := strconv.Atoi(scanner.Text())
 
-	friendsWaitingAnswer := map[int]int{}
-	eventsTimesMap := map[int]int{}
-
-	lastEntryType := ""
-
-	for range entriesLength {
+	events := make([]Event, entriesLength)
+	for i := range entriesLength {
 		scanner.Scan()
 		entry := scanner.Text()
-
 		parts := strings.Split(entry, " ")
-		entryType := parts[0]
 		value, _ := strconv.Atoi(parts[1])
+		events[i] = Event{Type: parts[0], Value: value}
+	}
 
-		if lastEntryType != "T" && entryType != "T" {
+	result := CalculateResponseTimes(events)
+	printFormattedResult(result)
+}
+
+func CalculateResponseTimes(events []Event) map[int]int {
+	friendsWaitingAnswer := map[int]int{}
+	eventsTimesMap := map[int]int{}
+	lastEntryType := ""
+
+	for _, ev := range events {
+		if lastEntryType != "T" && ev.Type != "T" {
 			incrementAllWaitingFriends(&friendsWaitingAnswer, 1)
 		}
 
-		switch entryType {
+		switch ev.Type {
 		case "T":
-			incrementAllWaitingFriends(&friendsWaitingAnswer, value)
-
+			incrementAllWaitingFriends(&friendsWaitingAnswer, ev.Value)
 		case "R":
-			friendsWaitingAnswer[value] = 0
-
+			friendsWaitingAnswer[ev.Value] = 0
 		case "E":
-			if awaitedTime, ok := friendsWaitingAnswer[value]; ok {
-				eventsTimesMap[value] += awaitedTime
-				delete(friendsWaitingAnswer, value)
+			if awaitedTime, ok := friendsWaitingAnswer[ev.Value]; ok {
+				eventsTimesMap[ev.Value] += awaitedTime
+				delete(friendsWaitingAnswer, ev.Value)
 			}
 		}
 
-		lastEntryType = entryType
+		lastEntryType = ev.Type
 	}
 
-	for friendMissedAnswer := range friendsWaitingAnswer {
-		eventsTimesMap[friendMissedAnswer] = -1
+	for friend := range friendsWaitingAnswer {
+		eventsTimesMap[friend] = -1
 	}
 
-	printFormattedResult(eventsTimesMap)
+	return eventsTimesMap
 }
 
 func incrementAllWaitingFriends(friendsWaitingAnswer *map[int]int, value int) {

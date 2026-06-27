@@ -71,6 +71,14 @@ go run src/2021/Tempo-de-resposta/main.go
 go run src/2021/Tempo-de-resposta/main.go < src/2021/Tempo-de-resposta/examples/example1.txt
 ```
 
+## 🧪 Testes
+
+Alguns problemas podem incluir arquivos de teste para verificar as soluções:
+
+```bash
+make test
+```
+
 <br />
 
 <p align="center">
