@@ -1,0 +1,3 @@
+test:
+	@go install gotest.tools/gotestsum@latest
+	@gotestsum --format testname -- -v ./...

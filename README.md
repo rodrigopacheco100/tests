@@ -65,10 +65,10 @@ Certifique-se de ter o [Go](https://go.dev/dl/) instalado (versão 1.21+):
 
 ```bash
 # Executar um problema específico
-go run src/2021/Tempo\ de\ resposta/main.go
+go run src/2021/Tempo-de-resposta/main.go
 
 # Ou usando entrada por arquivo
-go run src/2021/Tempo\ de\ resposta/main.go < src/2021/Tempo\ de\ resposta/examples/example1.txt
+go run src/2021/Tempo-de-resposta/main.go < src/2021/Tempo-de-resposta/examples/example1.txt
 ```
 
 <br />
