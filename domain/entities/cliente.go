@@ -14,7 +14,7 @@ const (
 )
 
 type Cliente struct {
-	Id        uuidv7.UUID
+	Id        string
 	Nome      string
 	Email     string
 	Tipo      ClienteTipo
@@ -27,7 +27,7 @@ func NewCliente(name, email string, tipo ClienteTipo) *Cliente {
 	now := time.Now().In(time.FixedZone("America/Sao_Paulo", -3*60*60))
 
 	return &Cliente{
-		Id:        uuidv7.New(),
+		Id:        uuidv7.New().String(),
 		Nome:      name,
 		Email:     email,
 		Tipo:      tipo,

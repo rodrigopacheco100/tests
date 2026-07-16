@@ -12,14 +12,14 @@ import (
 
 var validate = validator.New()
 
-// @name CreateClienteDTO
-type CreateClienteDTO struct {
+// @name createClienteDTO
+type createClienteDTO struct {
 	Nome  string `json:"nome" validate:"required" example:"João Silva"`
 	Email string `json:"email" validate:"required,email" example:"joao@email.com"`
 	Tipo  string `json:"tipo" validate:"required,oneof=fisico juridico" example:"fisico"`
 }
 
-type CreateClienteResponse struct {
+type createClienteResponse struct {
 	Message string `json:"message"`
 	Id      string `json:"id"`
 }
@@ -30,13 +30,13 @@ type CreateClienteResponse struct {
 // @Tags         clientes
 // @Accept       json
 // @Produce      json
-// @Param        request body CreateClienteDTO true "Dados do cliente"
-// @Success      200  {object}  CreateClienteResponse
+// @Param        request body createClienteDTO true "Dados do cliente"
+// @Success      200  {object}  createClienteResponse
 // @Failure      400  {object}  map[string]interface{}
 // @Failure      500  {object}  map[string]interface{}
 // @Router       /clientes/ [post]
 func CriarClienteHandler(ctx *gin.Context) {
-	var clienteDTO CreateClienteDTO
+	var clienteDTO createClienteDTO
 	if err := ctx.ShouldBindJSON(&clienteDTO); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -65,6 +65,6 @@ func CriarClienteHandler(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "Cliente criado com sucesso!",
-		"id":      output.Cliente.Id.String(),
+		"id":      output.Cliente.Id,
 	})
 }

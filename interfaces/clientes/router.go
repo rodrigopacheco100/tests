@@ -8,4 +8,5 @@ import (
 
 func NewClienteRouter(router *gin.RouterGroup) {
 	router.POST("/", clientes_handlers.CriarClienteHandler)
+	router.GET("/", clientes_handlers.ListarClientesHandler)
 }
