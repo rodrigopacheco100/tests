@@ -29,7 +29,11 @@ func NewClienteRepository() *ClienteRepository {
 }
 
 func (r *ClienteRepository) Criar(ctx context.Context, cliente *entities.Cliente) error {
-	sqlBuilder := sq.Insert("clientes").Columns("nome", "email", "tipo").Values(cliente.Nome, cliente.Email, cliente.Tipo).PlaceholderFormat(sq.Dollar)
+	sqlBuilder := sq.
+		Insert("clientes").
+		Columns("nome", "email", "tipo").
+		Values(cliente.Nome, cliente.Email, cliente.Tipo).
+		PlaceholderFormat(sq.Dollar)
 	query, args, _ := sqlBuilder.ToSql()
 
 	tx, err := r.db.Begin(ctx)
@@ -47,8 +51,24 @@ func (r *ClienteRepository) Criar(ctx context.Context, cliente *entities.Cliente
 }
 
 func (r *ClienteRepository) Listar(ctx context.Context, pagination *shared.PaginationRequest) (*shared.PaginationResult[entities.Cliente], error) {
-	clientesQuery, clientesArgs, _ := sq.Select("*").From("clientes").Where(sq.Eq(map[string]any{"deleted_at": nil})).PlaceholderFormat(sq.Dollar).Offset(uint64(pagination.Offset())).Limit(uint64(pagination.Limit)).ToSql()
-	totalQuery, totalArgs, _ := sq.Select("COUNT(*)").From("clientes").Where(sq.Eq(map[string]any{"deleted_at": nil})).PlaceholderFormat(sq.Dollar).ToSql()
+	clientesQuery, clientesArgs, _ := sq.
+		Select("*").
+		From("clientes").
+		Where(sq.Eq(map[string]any{
+			"deleted_at": nil,
+		})).
+		PlaceholderFormat(sq.Dollar).
+		Offset(uint64(pagination.Offset())).
+		Limit(uint64(pagination.Limit)).ToSql()
+
+	totalQuery, totalArgs, _ := sq.
+		Select("COUNT(*)").
+		From("clientes").
+		Where(sq.Eq(map[string]any{
+			"deleted_at": nil,
+		})).
+		PlaceholderFormat(sq.Dollar).
+		ToSql()
 
 	tx, err := r.db.Begin(ctx)
 	if err != nil {
